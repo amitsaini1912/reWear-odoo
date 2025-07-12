@@ -55,6 +55,7 @@ require('./config/passport')(passport);
 // Routes
 app.use('/', require('./routes/auth'));
 app.use('/items', require('./routes/items'));
+app.use('/admin', require('./routes/adminRoutes'));
 
 
 
