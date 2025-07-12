@@ -1,27 +1,502 @@
-<form action="/items/add" method="POST" enctype="multipart/form-data">
-  <label>Title:</label>
-  <input type="text" name="title" required />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product - ReWear</title>
+  <link rel="stylesheet" href="add-product.css">
+</head>
+<body>
 
-  <label>Description:</label>
-  <textarea name="description" required></textarea>
+  <header class="header">
+    <div class="logo">ReWear</div>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="#">Browse</a>
+      <a href="/login">Login</a>
+      <a href="/signup" class="signup-btn">Sign Up</a>
+    </nav>
+  </header>
 
-  <label>Category:</label>
-  <input type="text" name="category" required />
+  <div class="container">
+    <h1>Add New Product</h1>
+    
+    <main class="product-form">
+      <section class="left-panel">
+        <label for="images">Add Images</label>
+        <input type="file" name="image" id="images" multiple accept="image/*">
+      </section>
 
-  <label>Type:</label>
-  <input type="text" name="type" required />
+      <section class="right-panel">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" placeholder="Enter title">
 
-  <label>Size:</label>
-  <input type="text" name="size" required />
+        <label for="description">Description</label>
+        <textarea name="description" id="description" rows="6" placeholder="Add product description"></textarea>
 
-  <label>Condition:</label>
-  <input type="text" name="condition" required />
+        <div class="grid-fields">
+          <div>
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option value="">Select Category</option>
+              <option value="jackets">Jackets</option>
+              <option value="shirts">Shirts</option>
+              <option value="pants">Pants</option>
+              <option value="dresses">Dresses</option>
+            </select>
+          </div>
+          <div>
+            <label for="type">Type</label>
+            <input type="text" id="type" name="type" placeholder="e.g., Denim, Cotton">
+          </div>
+          <div>
+            <label for="size">Size</label>
+            <select id="size" name="size">
+              <option value="">Select Size</option>
+              <option value="xs">XS</option>
+              <option value="s">S</option>
+              <option value="m">M</option>
+              <option value="l">L</option>
+              <option value="xl">XL</option>
+            </select>
+          </div>
+          <div>
+            <label for="condition">Condition</label>
+            <select id="condition" name="condition">
+              <option value="">Select Condition</option>
+              <option value="new">New</option>
+              <option value="excellent">Excellent</option>
+              <option value="good">Good</option>
+              <option value="fair">Fair</option>
+            </select>
+          </div>
+          <div class="full">
+            <label for="tags">Tags</label>
+            <input type="text" id="tags" name="tags" placeholder="e.g., vintage, denim, summer">
+          </div>
+        </div>
 
-  <label>Tags (comma-separated):</label>
-  <input type="text" name="tags" />
+        <div class="status">
+          <label>Status:</label>
+          <select>
+            <option>Available</option>
+            <option>Swap</option>
+          </select>
+        </div>
 
-  <label>Image:</label>
-  <input type="file" name="image" accept="image/*" required />
+        <button class="submit-btn">Submit Listing</button>
+      </section>
+    </main>
 
-  <button type="submit">Submit</button>
-</form>
+    <section class="previous-listings">
+      <h3>Previous Listings</h3>
+      <div class="listings-grid">
+        <div class="listing-box">
+          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=300&fit=crop" alt="Classic White Shirt">
+          <div class="listing-content">
+            <h4>Classic White Shirt</h4>
+            <p class="price">$25</p>
+            <p class="condition">Excellent</p>
+          </div>
+        </div>
+        <div class="listing-box">
+          <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=400&h=300&fit=crop" alt="Vintage T-Shirt">
+          <div class="listing-content">
+            <h4>Vintage T-Shirt</h4>
+            <p class="price">$20</p>
+            <p class="condition">Good</p>
+          </div>
+        </div>
+        <div class="listing-box">
+          <img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&h=300&fit=crop" alt="Yellow T-Shirt">
+          <div class="listing-content">
+            <h4>Yellow T-Shirt</h4>
+            <p class="price">$18</p>
+            <p class="condition">Like New</p>
+          </div>
+        </div>
+        <div class="listing-box">
+          <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=300&fit=crop" alt="Summer Dress">
+          <div class="listing-content">
+            <h4>Summer Dress</h4>
+            <p class="price">$35</p>
+            <p class="condition">Excellent</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</body>
+
+<style>
+  
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #27ae60;
+    text-decoration: none;
+  }
+  
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 8px 0;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+  
+  .nav a:hover {
+    color: #27ae60;
+  }
+  
+  .nav a:not(.signup-btn):hover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #27ae60;
+  }
+  
+  .signup-btn {
+    background: #27ae60;
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+  }
+  
+  .signup-btn:hover {
+    background: #229954;
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+  }
+  
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .container h1 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  /* Product Form */
+  .product-form {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .left-panel {
+    flex: 1;
+  }
+  
+  .left-panel label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .left-panel input[type="file"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+  }
+  
+  .right-panel {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .right-panel label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .right-panel input,
+  .right-panel textarea,
+  .right-panel select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .right-panel input:focus,
+  .right-panel textarea:focus,
+  .right-panel select:focus {
+    outline: none;
+    border-color: #27ae60;
+  }
+  
+  .right-panel textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .grid-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .grid-fields .full {
+    grid-column: span 2;
+  }
+  
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  .status label {
+    margin: 0;
+  }
+  
+  .status select {
+    width: auto;
+    min-width: 120px;
+  }
+  
+  .submit-btn {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .submit-btn:hover {
+    background: #229954;
+  }
+  
+  /* Previous Listings */
+  .previous-listings {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .previous-listings h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .listing-box {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .listing-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  
+  .listing-box img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    background: #f0f0f0;
+    border-bottom: 1px solid #ddd;
+    transition: transform 0.3s ease;
+  }
+  
+  .listing-box:hover img {
+    transform: scale(1.05);
+  }
+  
+  .listing-box img:not([src]), 
+  .listing-box img[src=""],
+  .listing-box img[src*="error"] {
+    background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    position: relative;
+  }
+  
+  .listing-box img:not([src])::after, 
+  .listing-box img[src=""]::after,
+  .listing-box img[src*="error"]::after {
+    content: '📷';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    color: #ccc;
+  }
+  
+  .listing-content {
+    padding: 15px;
+  }
+  
+  .listing-content h4 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  
+  .listing-content .price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #27ae60;
+    margin-bottom: 5px;
+  }
+  
+  .listing-content .condition {
+    font-size: 14px;
+    color: #666;
+    background: #f0f0f0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header {
+      padding: 15px 20px;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .nav {
+      gap: 20px;
+    }
+    
+    .nav a {
+      font-size: 14px;
+    }
+    
+    .product-form {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .grid-fields {
+      grid-template-columns: 1fr;
+    }
+    
+    .grid-fields .full {
+      grid-column: span 1;
+    }
+    
+    .status {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .listings-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header {
+      padding: 10px 15px;
+    }
+    
+    .nav {
+      gap: 15px;
+    }
+    
+    .nav a {
+      font-size: 13px;
+    }
+    
+    .logo {
+      font-size: 24px;
+    }
+    
+    .listings-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  
+</style>
+
+</html>
