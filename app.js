@@ -51,17 +51,20 @@ app.use(passport.session());
 
 require('./config/passport')(passport);
 
+app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use('/', require('./routes/auth'));
-app.use('/items', require('./routes/items'));
+const itemRoutes = require('./routes/items');
+app.use('/items', itemRoutes);
 app.use('/admin', require('./routes/adminRoutes'));
 
 
 
 //Index Route
 app.get("/", (req, res) => {
-  res.send("Hi, I am root" );
+  res.render("pages/index.ejs");
 });
 
 
