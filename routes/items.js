@@ -13,23 +13,10 @@ router.get('/add', (req, res) => {
 });
 
 // Submit Item
-router.post('/add', isAuthenticated, upload.single('image'), async (req, res) => {
-  const tagsArray = req.body.tags.split(',').map(tag => tag.trim());
-  
-  const newItem = new Item({
-    title: req.body.title,
-    description: req.body.description,
-    category: req.body.category,
-    type: req.body.type,
-    size: req.body.size,
-    condition: req.body.condition,
-    tags: tagsArray,
-    image: '/uploads/' + req.file.filename,
-    uploader: req.user._id, // ✅ should now be defined!
-  });
-
-  await newItem.save();
-  res.redirect('/dashboard');
+router.post('/add-new', async(req, res) => {
+    let newItem = new Film(req.body);
+        await newFilm.save();
+        res.redirect("/");
 });
 
 // Browse Items - uploaded by all users
@@ -39,9 +26,13 @@ router.get('/', async (req, res) => {
 });
 
 // Item Detail
-router.get('/:id', async (req, res) => {
-    const item = await Item.findById(req.params.id).populate('uploader');
-    res.render('pages/item-detail', { item, user: req.session.user });
+// router.get('/:id', async (req, res) => {
+//     const item = await Item.findById(req.params.id).populate('uploader');
+//     res.render('pages/item-detail', { item, user: req.session.user });
+// });
+router.get('/items/:id', async (req, res) => {
+  const item = await Item.findById(req.params.id).populate('uploader');
+  res.render('pages/item-detail.ejs', { item });
 });
 
 module.exports = router;
