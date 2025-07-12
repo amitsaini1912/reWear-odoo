@@ -27,4 +27,10 @@ router.get('/', async (req, res) => {
     res.render('pages/index', { items, user: req.session.user });
 });
 
+// Item Detail
+router.get('/:id', async (req, res) => {
+    const item = await Item.findById(req.params.id).populate('uploader');
+    res.render('pages/item-detail', { item, user: req.session.user });
+});
+
 module.exports = router;
