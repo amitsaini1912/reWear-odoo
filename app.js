@@ -40,6 +40,7 @@ app.use(session({
 
 // Routes
 app.use('/', require('./routes/auth'));
+app.use('/items', require('./routes/items'));
 
 //Index Route
 app.get("/", (req, res) => {
