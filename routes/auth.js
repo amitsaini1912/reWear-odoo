@@ -20,6 +20,16 @@ router.post('/signup', async (req, res) => {
 
 // Login
 router.get('/login', (req, res) => res.render('pages/login'));
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.send('No user found');
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) return res.send('Wrong password');
+    req.session.user = user;
+    console.log(user);
+    res.render('pages/dashboard');
+});
 
 
 module.exports = router;
