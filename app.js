@@ -4,6 +4,10 @@ let port = 8000;
 const mongoose = require("mongoose");
 
 const session = require('express-session');
+
+const passport = require('passport');
+const flash = require('connect-flash');
+
 const MongoStore = require('connect-mongo');
 const path = require('path');
 require('dotenv').config();
@@ -38,9 +42,21 @@ app.use(session({
 }));
 
 
+// Flash messages
+app.use(flash());
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
+
+
 // Routes
 app.use('/', require('./routes/auth'));
 app.use('/items', require('./routes/items'));
+
+
 
 //Index Route
 app.get("/", (req, res) => {
