@@ -21,4 +21,10 @@ router.post('/add', async (req, res) => {
     }
 });
 
+// Browse Items - uploaded by all users
+router.get('/', async (req, res) => {
+    const items = await Item.find().populate('uploader');
+    res.render('pages/index', { items, user: req.session.user });
+});
+
 module.exports = router;
